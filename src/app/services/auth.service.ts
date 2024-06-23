@@ -6,21 +6,20 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class AuthService {
-
   constructor(private localStorageService: LocalStorageService, private router: Router) {
     this.initializeAdmin();
   }
 
   initializeAdmin(): void {
-    let users = this.localStorageService.getItem('users') || [];
-    if (!users.find((user: any) => user.username === 'admin')) {
+    let users: any[] = this.localStorageService.getItem<any[]>('users') || [];
+    if (!users.find(user => user.username === 'admin')) {
       users.push({ username: 'admin', name: 'Admin', password: 'admin123', email: 'admin@example.com', phone: '0000000000', role: 'admin' });
       this.localStorageService.setItem('users', users);
     }
   }
-
+  
   login(username: string, password: string): boolean {
-    const users = this.localStorageService.getItem('users') || [];
+    const users: any[] = this.localStorageService.getItem<any[]>('users') || [];
     const user = users.find((u: any) => u.username === username && u.password === password);
     if (user) {
       this.localStorageService.setItem('loggedInUser', user);
@@ -39,7 +38,7 @@ export class AuthService {
   }
 
   register(user: any): void {
-    const users = this.localStorageService.getItem('users') || [];
+    const users: any[] = this.localStorageService.getItem<any[]>('users') || [];
     users.push(user);
     this.localStorageService.setItem('users', users);
   }

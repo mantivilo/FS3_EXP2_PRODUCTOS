@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -8,7 +9,8 @@ import { RouterModule } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   standalone: true,
-  imports: [CommonModule, RouterModule]
+  imports: [CommonModule, RouterModule],
+  providers: [DecimalPipe]
 })
 export class HomeComponent implements OnInit {
   products = [
@@ -23,14 +25,18 @@ export class HomeComponent implements OnInit {
     { id: 9, name: 'Inter de Miami Local 2024', price: 55990, image: 'assets/images/intermiamiLocal2024.webp' }
   ];
 
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(private localStorageService: LocalStorageService, private decimalPipe: DecimalPipe) {}
 
   ngOnInit(): void {}
 
   addToCart(product: any): void {
-    let cart = this.localStorageService.getItem('cart') || [];
+    let cart: any[] = this.localStorageService.getItem<any[]>('cart') || [];
     cart.push(product);
     this.localStorageService.setItem('cart', cart);
     alert(`${product.name} ha sido agregado al carrito.`);
+  }
+
+  formatPrice(price: number): string {
+    return this.decimalPipe.transform(price, '1.0-0')?.replace(/,/g, '.') || '';
   }
 }
