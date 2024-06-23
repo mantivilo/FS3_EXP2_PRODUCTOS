@@ -1,6 +1,50 @@
 <div class="container mt-5">
-    <h2>Admin Dashboard</h2>
-    <p>Bienvenido al Admin Dashboard, aquí podrás manejar la tienda.</p>
-    <!-- Add admin functionalities here -->
+  <h2>Admin Dashboard</h2>
+  <p>Bienvenido al Admin Dashboard, aquí podrás manejar la tienda.</p>
+  
+  <div class="row">
+    <!-- Products Management Section -->
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Gestión de Productos</h3>
+        </div>
+        <div class="card-body">
+          <button class="btn btn-primary mb-2 button-gap" (click)="addProduct()">Agregar Producto</button>
+          <button class="btn btn-secondary mb-2 button-gap" (click)="editProduct()">Editar Producto</button>
+          <button class="btn btn-danger mb-2" (click)="deleteProduct()">Eliminar Producto</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Users Management Section -->
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Gestión de Usuarios</h3>
+        </div>
+        <div class="card-body">
+          <button class="btn btn-primary mb-2 button-gap" (click)="addUser()">Agregar Usuario</button>
+          <button class="btn btn-secondary mb-2 button-gap" (click)="editUser()">Editar Usuario</button>
+          <button class="btn btn-danger mb-2" (click)="deleteUser()">Eliminar Usuario</button>
+        </div>
+      </div>
+    </div>
   </div>
   
+  <div class="row">
+    <!-- Statistics Section -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>Estadísticas</h3>
+        </div>
+        <div class="card-body">
+          <p>Total de Ventas: $<span id="totalSales">123,456.78</span></p>
+          <p>Total de Usuarios: <span id="totalUsers">456</span></p>
+          <p>Productos en Stock: <span id="totalProducts">78</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

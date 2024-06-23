@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'la-camiseta-store';
 
-  hiddenFooterRoutes = ['/cart', '/register', '/login'];
+  hiddenFooterRoutes = ['/cart', '/register', '/login' , '/admin'];
 
   constructor(private router: Router) {}
 

@@ -1,42 +1,55 @@
 <div class="container mt-5">
-    <h2>Registrarse</h2>
-    <form (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="username" class="form-label">Nombre Usuario</label>
-        <input type="text" class="form-control" id="username" [(ngModel)]="username" name="username" required>
-        <div class="invalid-feedback">El Nombre Usuario no puede estar vacío.</div>
+  <h2>Registrarse</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="username" class="form-label">Nombre Usuario</label>
+      <input type="text" class="form-control" id="username" formControlName="username">
+      <div *ngIf="f['username'].touched && f['username'].invalid" class="invalid-feedback d-block">
+        El Nombre Usuario no puede estar vacío.
       </div>
-      <div class="mb-3">
-        <label for="name" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name" required>
-        <div class="invalid-feedback">El Nombre no puede estar vacío.</div>
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="name" formControlName="name">
+      <div *ngIf="f['name'].touched && f['name'].invalid" class="invalid-feedback d-block">
+        El Nombre no puede estar vacío.
       </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
-        <div class="invalid-feedback">La Contraseña debe tener un largo entre 6-15 caracteres, contener al menos un número y una mayúscula.</div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input type="password" class="form-control" id="password" formControlName="password">
+      <div *ngIf="f['password'].touched && f['password'].invalid" class="invalid-feedback d-block">
+        La Contraseña debe tener un largo entre 6-15 caracteres, contener al menos un número y una mayúscula.
       </div>
-      <div class="mb-3">
-        <label for="repeatPassword" class="form-label">Repetir Contraseña</label>
-        <input type="password" class="form-control" id="repeatPassword" [(ngModel)]="repeatPassword" name="repeatPassword" required>
-        <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+    </div>
+    <div class="mb-3">
+      <label for="repeatPassword" class="form-label">Repetir Contraseña</label>
+      <input type="password" class="form-control" id="repeatPassword" formControlName="repeatPassword">
+      <div *ngIf="f['repeatPassword'].touched && (f['repeatPassword'].invalid || f['repeatPassword'].errors?.['mismatch'])" class="invalid-feedback d-block">
+        Las contraseñas no coinciden.
       </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
-        <div class="invalid-feedback">Por favor ingresar un email válido.</div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+      <div *ngIf="f['email'].touched && f['email'].invalid" class="invalid-feedback d-block">
+        Por favor ingresar un email válido.
       </div>
-      <div class="mb-3">
-        <label for="phone" class="form-label">Teléfono</label>
-        <input type="tel" class="form-control" id="phone" [(ngModel)]="phone" name="phone" required>
-        <div class="invalid-feedback">Por favor ingresar un teléfono válido.</div>
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Teléfono</label>
+      <input type="tel" class="form-control" id="phone" formControlName="phone">
+      <div *ngIf="f['phone'].touched && f['phone'].invalid" class="invalid-feedback d-block">
+        Por favor ingresar un teléfono válido.
       </div>
-      <div class="form-check mb-3">
-        <input type="checkbox" class="form-check-input" id="terms" [(ngModel)]="terms" name="terms" required>
-        <label class="form-check-label" for="terms">Aceptar términos y condiciones</label>
-        <div class="invalid-feedback">Debes aceptar los términos y condiciones.</div>
+    </div>
+    <div class="form-check mb-3">
+      <input type="checkbox" class="form-check-input" id="terms" formControlName="terms">
+      <label class="form-check-label" for="terms">Aceptar términos y condiciones</label>
+      <div *ngIf="f['terms'].touched && f['terms'].invalid" class="invalid-feedback d-block">
+        Debes aceptar los términos y condiciones.
       </div>
-      <button type="submit" class="btn btn-primary">Registrar</button>
-    </form>
-  </div>
-  
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+  </form>
+</div>
