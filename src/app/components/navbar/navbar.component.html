@@ -1,37 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLink="/">La Camiseta Store</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categorias
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-            <li><a class="dropdown-item" routerLink="/ligachilena">Liga Chilena</a></li>
-            <li><a class="dropdown-item" href="#">Copa Libertadores</a></li>
-            <li><a class="dropdown-item" href="#">UEFA Champions League</a></li>
-          </ul>
-        </li>
-        <li class="nav-item" *ngIf="!loggedInUser">
-          <a class="nav-link" routerLink="/register">Registrarse</a>
-        </li>
-        <li class="nav-item" *ngIf="!loggedInUser">
-          <a class="nav-link" routerLink="/login">Login</a>
-        </li>
-        <li class="nav-item" *ngIf="loggedInUser">
-          <a class="nav-link" href="#" (click)="logout()">Logout</a>
-        </li>
-        <li class="nav-item" *ngIf="loggedInUser">
-          <a class="nav-link" href="#"><i class="fas fa-user"></i> {{ loggedInUser.name || 'Admin' }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/cart">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="cart-count" class="badge badge-pill badge-primary">0</span>
-            <span id="cart-total" class="badge badge-pill badge-dark">$0.00</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  
+  <a class="navbar-brand" routerLink="/">La Camiseta Store</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Categorias
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+          <li><a class="dropdown-item" routerLink="/ligachilena">Liga Chilena</a></li>
+          <li><a class="dropdown-item" href="#">Copa Libertadores</a></li>
+          <li><a class="dropdown-item" href="#">UEFA Champions League</a></li>
+        </ul>
+      </li>
+      <li class="nav-item" *ngIf="!loggedInUser">
+        <a class="nav-link" routerLink="/register">Registrarse</a>
+      </li>
+      <li class="nav-item" *ngIf="!loggedInUser">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="loggedInUser">
+        <a class="nav-link" href="#" (click)="logout()">Logout</a>
+      </li>
+      <li class="nav-item" *ngIf="loggedInUser">
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> {{ loggedInUser.name || 'Admin' }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count" class="badge badge-pill badge-primary">{{ cartCount }}</span>
+          <span id="cart-total" class="badge badge-pill badge-dark">{{ cartTotal | currency:'USD':'symbol':'1.0-0' }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private cartSubject = new BehaviorSubject<any[]>(this.localStorageService.getItem<any[]>('cart') || []);
+  cart$ = this.cartSubject.asObservable();
+
   constructor(private localStorageService: LocalStorageService, private router: Router) {
     this.initializeAdmin();
   }
@@ -17,7 +21,7 @@ export class AuthService {
       this.localStorageService.setItem('users', users);
     }
   }
-  
+
   login(username: string, password: string): boolean {
     const users: any[] = this.localStorageService.getItem<any[]>('users') || [];
     const user = users.find((u: any) => u.username === username && u.password === password);
@@ -41,5 +45,18 @@ export class AuthService {
     const users: any[] = this.localStorageService.getItem<any[]>('users') || [];
     users.push(user);
     this.localStorageService.setItem('users', users);
+  }
+
+  updateCart(cart: any[]): void {
+    this.localStorageService.setItem('cart', cart);
+    this.cartSubject.next(cart);
+  }
+
+  getCartValue(): any[] {
+    return this.cartSubject.value;
+  }
+
+  getCartTotal(): number {
+    return this.cartSubject.value.reduce((total, item) => total + item.price, 0);
   }
 }

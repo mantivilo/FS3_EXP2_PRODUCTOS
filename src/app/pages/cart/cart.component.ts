@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,21 +15,21 @@ export class CartComponent implements OnInit {
   cart: any[] = [];
   cartTotal = 0;
 
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(private localStorageService: LocalStorageService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.cart = this.localStorageService.getItem('cart') || [];
+    this.cart = this.authService.getCartValue();
     this.updateCartTotal();
   }
 
   removeFromCart(index: number): void {
     this.cart.splice(index, 1);
-    this.localStorageService.setItem('cart', this.cart);
+    this.authService.updateCart(this.cart);
     this.updateCartTotal();
   }
 
   emptyCart(): void {
-    this.localStorageService.removeItem('cart');
+    this.authService.updateCart([]);
     this.cart = [];
     this.updateCartTotal();
   }
@@ -40,5 +41,9 @@ export class CartComponent implements OnInit {
 
   updateCartTotal(): void {
     this.cartTotal = this.cart.reduce((sum, product) => sum + product.price, 0);
+  }
+
+  formatPrice(price: number): string {
+    return price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 }

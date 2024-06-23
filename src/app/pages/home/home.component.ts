@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,7 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
   providers: [DecimalPipe]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   products = [
     { id: 1, name: 'Colo Colo Local 2024', price: 53990, image: 'assets/images/colocoloLocal2024.webp' },
     { id: 2, name: 'Manchester City Local 2024', price: 54990, image: 'assets/images/manchestercityLocal2024.webp' },
@@ -25,15 +27,22 @@ export class HomeComponent implements OnInit {
     { id: 9, name: 'Inter de Miami Local 2024', price: 55990, image: 'assets/images/intermiamiLocal2024.webp' }
   ];
 
-  constructor(private localStorageService: LocalStorageService, private decimalPipe: DecimalPipe) {}
+  private cartSubscription: Subscription | null = null;
+
+  constructor(private authService: AuthService, private decimalPipe: DecimalPipe) {}
 
   ngOnInit(): void {}
 
+  ngOnDestroy(): void {
+    if (this.cartSubscription) {
+      this.cartSubscription.unsubscribe();
+    }
+  }
+
   addToCart(product: any): void {
-    let cart: any[] = this.localStorageService.getItem<any[]>('cart') || [];
-    cart.push(product);
-    this.localStorageService.setItem('cart', cart);
-    alert(`${product.name} ha sido agregado al carrito.`);
+    const currentCart = this.authService.getCartValue();
+    const updatedCart = [...currentCart, product];
+    this.authService.updateCart(updatedCart);
   }
 
   formatPrice(price: number): string {
