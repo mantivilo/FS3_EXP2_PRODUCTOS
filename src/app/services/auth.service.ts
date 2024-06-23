@@ -10,6 +10,9 @@ export class AuthService {
   private cartSubject = new BehaviorSubject<any[]>(this.localStorageService.getItem<any[]>('cart') || []);
   cart$ = this.cartSubject.asObservable();
 
+  private loggedInUserSubject = new BehaviorSubject<any>(this.localStorageService.getItem('loggedInUser'));
+  loggedInUser$ = this.loggedInUserSubject.asObservable();
+
   constructor(private localStorageService: LocalStorageService, private router: Router) {
     this.initializeAdmin();
   }
@@ -27,6 +30,7 @@ export class AuthService {
     const user = users.find((u: any) => u.username === username && u.password === password);
     if (user) {
       this.localStorageService.setItem('loggedInUser', user);
+      this.loggedInUserSubject.next(user);
       return true;
     }
     return false;
@@ -34,6 +38,7 @@ export class AuthService {
 
   logout(): void {
     this.localStorageService.removeItem('loggedInUser');
+    this.loggedInUserSubject.next(null);
     this.router.navigate(['/']);
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -15,7 +15,11 @@ export class CartComponent implements OnInit {
   cart: any[] = [];
   cartTotal = 0;
 
-  constructor(private localStorageService: LocalStorageService, private authService: AuthService) {}
+  constructor(
+    private localStorageService: LocalStorageService, 
+    private authService: AuthService,
+    private router: Router // Inject Router service
+  ) {}
 
   ngOnInit(): void {
     this.cart = this.authService.getCartValue();
@@ -37,6 +41,7 @@ export class CartComponent implements OnInit {
   pay(): void {
     alert('Su pago ha sido procesado correctamente');
     this.emptyCart();
+    this.router.navigate(['/']); // Redirect to home page
   }
 
   updateCartTotal(): void {

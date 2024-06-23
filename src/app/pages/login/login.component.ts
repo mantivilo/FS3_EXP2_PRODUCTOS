@@ -34,6 +34,6 @@ export class LoginComponent {
 
   onRecover(): void {
     // Simulate email recovery
-    alert('Las instruciones para recuperar la contraseña han sido enviadas a su correo.');
+    alert('Las instrucciones para recuperar la contraseña han sido enviadas a su correo.');
   }
 }

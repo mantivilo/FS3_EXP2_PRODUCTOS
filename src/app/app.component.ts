@@ -3,6 +3,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +14,12 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'la-camiseta-store';
+
+  hiddenFooterRoutes = ['/cart', '/register', '/login'];
+
+  constructor(private router: Router) {}
+
+  shouldHideFooter(): boolean {
+    return this.hiddenFooterRoutes.includes(this.router.url);
+  }
 }
