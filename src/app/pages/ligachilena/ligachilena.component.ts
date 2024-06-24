@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 
+/**
+ * LigaChilenaComponent displays products from the Chilean football league.
+ */
 @Component({
   selector: 'app-ligachilena',
   templateUrl: './ligachilena.component.html',
@@ -15,6 +18,7 @@ import { Subscription } from 'rxjs';
   providers: [DecimalPipe]
 })
 export class LigaChilenaComponent implements OnInit, OnDestroy {
+  /** Array of products available in the Liga Chilena */
   products = [
     { id: 1, name: 'Colo Colo Local 2024', price: 53990, image: 'assets/images/colocoloLocal2024.webp' },
     { id: 2, name: 'Universidad Católica Local 2024', price: 50990, image: 'assets/images/ucLocal2024.webp' },
@@ -34,24 +38,45 @@ export class LigaChilenaComponent implements OnInit, OnDestroy {
     { id: 16, name: 'Cobresal Local 2024', price: 47990, image: 'assets/images/cobresalLocal2024.jpg' },
   ];
 
+  /** Subscription to the cart observable */
   private cartSubscription: Subscription | null = null;
 
+  /**
+   * Constructor for the LigaChilenaComponent.
+   * @param authService - Service to handle authentication and cart updates.
+   * @param decimalPipe - Pipe to format numbers.
+   */
   constructor(private authService: AuthService, private decimalPipe: DecimalPipe) {}
 
+  /**
+   * Initializes the component.
+   */
   ngOnInit(): void {}
 
+  /**
+   * Cleans up any subscriptions when the component is destroyed.
+   */
   ngOnDestroy(): void {
     if (this.cartSubscription) {
       this.cartSubscription.unsubscribe();
     }
   }
 
+  /**
+   * Adds a product to the cart.
+   * @param product - The product to add to the cart.
+   */
   addToCart(product: any): void {
     const currentCart = this.authService.getCartValue();
     const updatedCart = [...currentCart, product];
     this.authService.updateCart(updatedCart);
   }
 
+  /**
+   * Formats the price to a string with no decimal places and thousands separators.
+   * @param price - The price to format.
+   * @returns The formatted price.
+   */
   formatPrice(price: number): string {
     return this.decimalPipe.transform(price, '1.0-0')?.replace(/,/g, '.') || '';
   }

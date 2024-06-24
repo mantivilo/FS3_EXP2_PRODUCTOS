@@ -19,8 +19,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private cartSubscription: Subscription | null = null;
   private userSubscription: Subscription | null = null;
 
+  /**
+   * Constructor of the NavbarComponent class
+   * @param authService Service to handle authentication and authorization operations
+   */
   constructor(private authService: AuthService) {}
 
+  /**
+   * OnInit lifecycle hook
+   * Subscribes to the cart and user observables to update component state
+   */
   ngOnInit(): void {
     this.cartSubscription = this.authService.cart$.subscribe(cart => {
       this.cart = cart;
@@ -33,6 +41,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * OnDestroy lifecycle hook
+   * Unsubscribes from the cart and user observables to avoid memory leaks
+   */
   ngOnDestroy(): void {
     if (this.cartSubscription) {
       this.cartSubscription.unsubscribe();
@@ -42,6 +54,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Logs the user out and updates the component state
+   */
   logout(): void {
     this.authService.logout();
     this.loggedInUser = null;
