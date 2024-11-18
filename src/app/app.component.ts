@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'la-camiseta-store';
+  title = 'producto-store';
 
   hiddenFooterRoutes = ['/cart', '/register', '/login' , '/admin'];
 

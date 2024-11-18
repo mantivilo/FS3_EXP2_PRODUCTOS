@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "la-camiseta-store": {
+    "producto-store": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/la-camiseta-store",
+            "outputPath": "dist/producto-store",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "la-camiseta-store:build:production"
+              "buildTarget": "producto-store:build:production"
             },
             "development": {
-              "buildTarget": "la-camiseta-store:build:development"
+              "buildTarget": "producto-store:build:development"
             }
           },
           "defaultConfiguration": "development"

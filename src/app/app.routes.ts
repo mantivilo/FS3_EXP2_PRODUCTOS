@@ -3,7 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { LigaChilenaComponent } from './pages/ligachilena/ligachilena.component';
+import { CervezasComponent } from './pages/cervezas/cervezas.component';
 import { AdminComponent } from './pages/admin/admin.component';
 
 export const routes: Routes = [
@@ -11,6 +11,6 @@ export const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'ligachilena', component: LigaChilenaComponent },
+  { path: 'cervezas', component: CervezasComponent },
   { path: 'admin', component: AdminComponent } 
 ];

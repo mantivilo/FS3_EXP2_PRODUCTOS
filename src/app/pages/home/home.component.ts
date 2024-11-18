@@ -20,15 +20,15 @@ import { Subscription } from 'rxjs';
 export class HomeComponent implements OnInit, OnDestroy {
   /** Array of products available on the home page */
   products = [
-    { id: 1, name: 'Colo Colo Local 2024', price: 53990, image: 'assets/images/colocoloLocal2024.webp' },
-    { id: 2, name: 'Manchester City Local 2024', price: 54990, image: 'assets/images/manchestercityLocal2024.webp' },
-    { id: 3, name: 'Manchester City Visita 2024', price: 56000, image: 'assets/images/manchestercityVisita2024.jpg' },
-    { id: 4, name: 'Boca Juniors Local 2024', price: 55990, image: 'assets/images/bocajuniorsLocal2024.webp' },
-    { id: 5, name: 'River Plate Local 2024', price: 54990, image: 'assets/images/riverplateLocal2024.webp' },
-    { id: 6, name: 'PSG Local 2024', price: 53990, image: 'assets/images/psgLocal2024.webp' },
-    { id: 7, name: 'Real Madrid Local 2024', price: 60990, image: 'assets/images/realmadridLocal2024.webp' },
-    { id: 8, name: 'Inter de Milán Local 2024', price: 70000, image: 'assets/images/intermilanLocal2024.webp' },
-    { id: 9, name: 'Inter de Miami Local 2024', price: 55990, image: 'assets/images/intermiamiLocal2024.webp' }
+    { id: 1, name: 'Promo Alto del Carmen 35', price: 7000, image: 'assets/images/promoAltoCarmen.png' },
+    { id: 2, name: 'Ramazzotti 700 cc', price: 9990, image: 'assets/images/Ramazzotti.png' },
+    { id: 3, name: 'Aperol 750 CC', price: 9500, image: 'assets/images/Aperol.png' },
+    { id: 4, name: 'Whiskey Jack Daniels N7 750 CC', price: 22360, image: 'assets/images/JackDaniels7.png' },
+    { id: 5, name: 'Jagermeister 700 CC', price: 12000, image: 'assets/images/Jagermeister.png' },
+    { id: 6, name: 'Vino Santa Helena Blanco 2Lt', price: 3500, image: 'assets/images/VinoSantaHelena.png' },
+    { id: 7, name: 'Espumante Vinamar Brut 750 CC', price: 4500, image: 'assets/images/EspumanteVinaBrut.png' },
+    { id: 8, name: 'Vodka Absolut Blue Botella 750cc', price: 11500, image: 'assets/images/VodkaAbsolut.png' },
+    { id: 9, name: 'Sangria Lola Botella 750cc', price: 55990, image: 'assets/images/SangriaLola.png' }
   ];
 
   /** Subscription to the cart observable */
