@@ -20,10 +20,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'la-camiseta-store'`, () => {
+  it(`should have as title 'producto-store'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('la-camiseta-store');
+    expect(app.title).toEqual('producto-store');
   });
 
   it('should render title', () => {
@@ -39,6 +39,6 @@ describe('AppComponent', () => {
     // Append the span to the compiled element
     compiled.appendChild(span);
 
-    expect(compiled.querySelector('.content')?.textContent).toContain('la-camiseta-store app is running!');
+    expect(compiled.querySelector('.content')?.textContent).toContain('producto-store app is running!');
   });
 });
